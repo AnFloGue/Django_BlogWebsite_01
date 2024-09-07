@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+
 from django.http import HttpResponse
 
 posts = [
@@ -26,33 +28,45 @@ posts = [
         )
     }
 ]
+
 def home(request):
+    return HttpResponse("<h1>Welcome to the blog</h1>")
+
+
+
+def post(request):
     html = ""
     for post in posts:
         html += f"""
         <div>
-            <h1>ID: {post['id']}</h1>
+            <a href="/post/{post['id']}">
+                <h1>ID: {post['id']}</h1>
+            </a>
             <h1>title: {post['title']}</h1>
-            <p>{post['content']}</p>
+            <p>{post['description']}</p>
         </div>
         """
         print(html)
         print("----------------------------------------")
     return HttpResponse(html)
 
-def post(request, id):
-    id = int(id)
+def post_by_id(request, id):
     selected_post = None
-    print(request)
-    
     for post in posts:
-        print(post)
         if post['id'] == id:
             selected_post = post
-            print(selected_post)
             break
-            
     if selected_post is None:
         return HttpResponse("Post not found", status=404)
     
-    return HttpResponse(selected_post['description'])
+    html = f"""
+    <div>
+        <h1>ID: {selected_post['id']}</h1>
+        <h1>title: {selected_post['title']}</h1>
+        <p>{selected_post['description']}</p>
+    </div>
+    """
+    return HttpResponse(html)
+
+def google(request, id):
+    return HttpResponseRedirect(f"/post/{id}")
