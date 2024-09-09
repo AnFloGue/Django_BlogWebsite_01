@@ -1,8 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import path, reverse
-from django.http import HttpResponse
 
 posts = [
     {
@@ -52,6 +50,7 @@ def post_by_id(request, id):
     
     html = f"""
     <div>
+        <a href="{reverse('blog:house')}" class="btn btn-secondary">Back to Home</a>
         <h1>ID: {selected_post['id']}</h1>
         <h1>title: {selected_post['title']}</h1>
         <p>{selected_post['description']}</p>

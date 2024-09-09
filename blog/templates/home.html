@@ -8,17 +8,10 @@
 <body>
 
     <div>
-        {% if posts %}
-            <h1>All post available</h1>
-            {% for post in posts %}
-
-                <a href="{% url 'blog:post_by_id' post.id %}" style="font-size: 2em; font-weight: bold;"> {{ forloop.counter }} - {{ post.title }}</a>
-
-                <p>{{ post.description }}</p>
-            {% endfor %}
-        {% else %}
-            <h1>No post there</h1>
-        {% endif %}
+        {% for post in posts %}
+            <a href="{% url 'blog:post_by_id' post.id %}" style="font-size: 2em; font-weight: bold;"> {{ forloop.counter }} - {{ post.title }}</a>
+            <p>{{ post.description }}</p>
+        {% endfor %}
     </div>
 </body>
 </html>
