@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-
+from django.shortcuts import render
+from django.urls import path, reverse
 from django.http import HttpResponse
 
 posts = [
@@ -28,27 +29,17 @@ posts = [
         )
     }
 ]
-
+# posts = [   ]
 def home(request):
-    return HttpResponse("<h1>Welcome to the blog</h1>")
+    context = {"posts": posts}  # Correct the dictionary key
+    return render(request, 'home.html', context)
 
 
 
 def post(request):
-    html = ""
-    for post in posts:
-        html += f"""
-        <div>
-            <a href="/post/{post['id']}">
-                <h1>ID: {post['id']}</h1>
-            </a>
-            <h1>title: {post['title']}</h1>
-            <p>{post['description']}</p>
-        </div>
-        """
-        print(html)
-        print("----------------------------------------")
-    return HttpResponse(html)
+    
+
+    return render(request, 'post.html')
 
 def post_by_id(request, id):
     selected_post = None
