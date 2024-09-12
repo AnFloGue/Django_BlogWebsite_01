@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
+{% block body %}
 
-    <div>
-        {% for post in posts %}
-            <a href="{% url 'blog:post_by_id' post.id %}" style="font-size: 2em; font-weight: bold;"> {{ forloop.counter }} - {{ post.title }}</a>
-            <p>{{ post.description }}</p>
-        {% endfor %}
-    </div>
-</body>
-</html>
+<div>
+    {% for post in posts %}
+        <a href="{% url 'blog:post_by_id' post.id %}" class="post-title"> {{ forloop.counter }} - {{ post.title }}</a>
+        <br>
+        <p>{{ post.description }}</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
